@@ -105,19 +105,22 @@
     btn.textContent = 'Sending…';
 
     try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 10000);
-      const response = await fetch('https://ygmhcyeedvyqyzhlsafu.supabase.co/functions/v1/contact-form', {
+      const response = await fetch('https://api.resend.com/emails', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject, message }),
-        signal: controller.signal
+        headers: {
+          'Authorization': 'Bearer re_JkonATPw_HXNSSw4QaKGYz75sDJjjgWbW',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Settled Contact Form <hello@settlednow.co.uk>',
+          to: 'hello@settlednow.co.uk',
+          reply_to: email,
+          subject: '[Settled] ' + subject + ' from ' + name,
+          text: 'Name: ' + name + '\nEmail: ' + email + '\nSubject: ' + subject + '\n\nMessage:\n' + message
+        })
       });
-      clearTimeout(timeout);
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
+      if (response.ok) {
         document.getElementById('form-container').style.display = 'none';
         document.getElementById('success-msg').style.display = 'block';
       } else {
