@@ -360,9 +360,9 @@ function LandingPage({onGetStarted}) {
           <span style={{fontWeight:700,color:"#fff"}}>Settled</span>
         </div>
         <div style={{display:"flex",gap:20,flexWrap:"wrap"}}>
-          {[["Privacy Policy","/privacy.html"],["Terms & Conditions","/terms.html"],["Contact","mailto:hello@settlednow.co.uk"]].map(([label,href])=>(
-            <a key={label} href={href} style={{fontSize:13,color:"#475569",textDecoration:"none"}}>{label}</a>
-          ))}
+          <a href="/privacy.html" style={{fontSize:13,color:"#475569",textDecoration:"none"}}>Privacy Policy</a>
+          <a href="/terms.html" style={{fontSize:13,color:"#475569",textDecoration:"none"}}>Terms & Conditions</a>
+          <a href="/contact.html" style={{fontSize:13,color:"#475569",textDecoration:"none"}}>Contact</a>
         </div>
         <div style={{fontSize:13,color:"#334155"}}>© 2026 Settled</div>
       </div>
