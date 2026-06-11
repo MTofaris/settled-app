@@ -1,0 +1,26 @@
+{
+  "name": "Settled — Debt Freedom Tracker",
+  "short_name": "Settled",
+  "description": "Track every debt, plan your payoff, and know exactly when you'll be debt free.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d17",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "productivity"],
+  "lang": "en-GB"
+}
