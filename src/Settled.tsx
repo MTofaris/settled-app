@@ -1486,7 +1486,7 @@ export default function DebtTracker() {
             </div>
 
             <div style={{fontSize:11,color:"#334155",textAlign:"center",marginBottom:8}}>🔒 Secure payment via Stripe · No hidden fees</div>
-            <div style={{display:"flex",justifyContent:"center",gap:16",marginBottom:8}}>
+            <div style={{display:"flex",justifyContent:"center",gap:16,marginBottom:8}}>
               <a href="/privacy.html" target="_blank" style={{fontSize:11,color:"#475569",textDecoration:"none"}}>Privacy Policy</a>
               <a href="/terms.html" target="_blank" style={{fontSize:11,color:"#475569",textDecoration:"none"}}>Terms & Conditions</a>
             </div>
