@@ -204,6 +204,171 @@ function CelebrationOverlay({title,subtitle,emoji,onDone}) {
   );
 }
 
+
+function LandingPage({onGetStarted}) {
+  const S = {
+    page: {minHeight:"100vh",background:"#0d0d17",color:"#e2e8f0",fontFamily:"'DM Sans',-apple-system,'Segoe UI',sans-serif"},
+    nav: {display:"flex",alignItems:"center",justifyContent:"space-between",padding:"20px 24px",maxWidth:1100,margin:"0 auto"},
+    logo: {display:"flex",alignItems:"center",gap:8},
+    hero: {textAlign:"center",padding:"72px 24px 56px",maxWidth:800,margin:"0 auto"},
+    badge: {display:"inline-flex",alignItems:"center",gap:6,background:"#6366f115",border:"1px solid #6366f130",borderRadius:999,padding:"6px 16px",fontSize:13,color:"#a78bfa",fontWeight:600,marginBottom:24},
+    h1: {fontSize:"clamp(34px,6vw,58px)",fontWeight:800,color:"#fff",letterSpacing:"-2px",lineHeight:1.1,marginBottom:20},
+    sub: {fontSize:18,color:"#64748b",lineHeight:1.6,marginBottom:36,maxWidth:520,margin:"0 auto 36px"},
+    btnPrimary: {background:"#6366f1",color:"#fff",padding:"16px 32px",borderRadius:12,fontSize:16,fontWeight:700,border:"none",cursor:"pointer",boxShadow:"0 8px 32px #6366f140"},
+    btnSecondary: {background:"#12122a",border:"1px solid #1e1e3a",color:"#e2e8f0",padding:"16px 32px",borderRadius:12,fontSize:16,fontWeight:600,cursor:"pointer"},
+    previewWrap: {maxWidth:860,margin:"0 auto 80px",padding:"0 24px"},
+    previewInner: {background:"linear-gradient(135deg,#12122a,#0d0d17)",border:"1px solid #1e1e3a",borderRadius:24,padding:28},
+    featuresWrap: {maxWidth:1100,margin:"0 auto 80px",padding:"0 24px"},
+    featuresGrid: {display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:20,marginTop:48},
+    featureCard: {background:"#12122a",border:"1px solid #1e1e3a",borderRadius:20,padding:28},
+    featureIcon: {width:48,height:48,borderRadius:14,background:"#6366f115",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,marginBottom:16},
+    pricingWrap: {maxWidth:800,margin:"0 auto 80px",padding:"0 24px"},
+    pricingGrid: {display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16,marginTop:32},
+    pricingCard: (featured) => ({background:featured?"linear-gradient(135deg,#6366f112,#12122a)":"#12122a",border:featured?"2px solid #6366f1":"1px solid #1e1e3a",borderRadius:20,padding:28,position:"relative"}),
+    ctaBanner: {maxWidth:800,margin:"0 auto 60px",padding:"0 24px"},
+    ctaInner: {background:"linear-gradient(135deg,#6366f120,#a78bfa12)",border:"1px solid #6366f140",borderRadius:24,padding:"48px 32px",textAlign:"center"},
+    footer: {borderTop:"1px solid #1e1e3a",padding:"28px 24px",maxWidth:1100,margin:"0 auto"},
+  };
+
+  const features = [
+    {icon:"🎯",title:"Your exact debt-free date",desc:"See precisely when you'll clear every debt — calculated in real time as you add debts and log payments."},
+    {icon:"⚡",title:"Pay Faster slider",desc:"Move a slider to see how any extra amount per month changes your debt-free date. Watch years disappear."},
+    {icon:"🔥",title:"Smart strategies",desc:"Avalanche or Snowball — choose the approach that matches your goals and see the impact instantly."},
+    {icon:"💰",title:"Budget Accelerator",desc:"Enter your income and expenses to see exactly how your surplus clears debt, month by month."},
+    {icon:"📅",title:"Auto payment tracking",desc:"Set your due date and Settled automatically applies your minimum payment when it arrives."},
+    {icon:"☁️",title:"Syncs everywhere",desc:"Your data is securely stored in the cloud. Access from any phone, tablet, or computer."},
+  ];
+
+  return (
+    <div style={S.page}>
+      <nav style={S.nav}>
+        <div style={S.logo}>
+          <span style={{fontSize:22,color:"#6366f1"}}>✦</span>
+          <span style={{fontSize:20,fontWeight:800,color:"#fff",letterSpacing:"-0.5px"}}>Settled</span>
+        </div>
+        <button style={{...S.btnPrimary,padding:"10px 20px",fontSize:14,boxShadow:"none"}} onClick={onGetStarted}>Get started free →</button>
+      </nav>
+
+      <section style={S.hero}>
+        <div style={S.badge}>✦ Built for UK debt freedom</div>
+        <h1 style={S.h1}>Know exactly when you'll be <span style={{background:"linear-gradient(135deg,#6366f1,#a78bfa)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>debt free</span></h1>
+        <p style={S.sub}>Track every debt, plan your payoff strategy, and watch your freedom date get closer every month. Takes 60 seconds to get started.</p>
+        <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",marginBottom:16}}>
+          <button style={S.btnPrimary} onClick={onGetStarted}>Start for free — no card needed</button>
+        </div>
+        <div style={{fontSize:13,color:"#334155"}}>Free plan available · No credit card required</div>
+      </section>
+
+      <div style={S.previewWrap}>
+        <div style={S.previewInner}>
+          <div style={{display:"flex",gap:6,marginBottom:20}}>
+            {["#f43f5e","#fbbf24","#34d399"].map(c=><div key={c} style={{width:10,height:10,borderRadius:"50%",background:c}} />)}
+          </div>
+          <div style={{background:"linear-gradient(135deg,#34d39915,#6366f112)",border:"1px solid #34d39940",borderRadius:16,padding:"18px 20px",marginBottom:12}}>
+            <div style={{fontSize:11,color:"#34d399",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:6}}>🎯 You could be debt-free in</div>
+            <div style={{fontSize:28,fontWeight:800,color:"#fff",letterSpacing:"-1px"}}>2 years, 4 months</div>
+            <div style={{fontSize:13,color:"#64748b",marginTop:4}}>by October 2028 · at minimum payments</div>
+          </div>
+          <div style={{background:"#0d0d17",border:"1px solid #1e1e3a",borderRadius:14,padding:16,marginBottom:12}}>
+            <div style={{fontSize:11,color:"#475569",fontWeight:600,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:6}}>Total Remaining</div>
+            <div style={{fontSize:30,fontWeight:800,color:"#fff",letterSpacing:"-1px",marginBottom:8}}>£12,450.00</div>
+            <div style={{background:"#1e1e2e",borderRadius:999,height:6,marginBottom:6}}>
+              <div style={{width:"38%",height:"100%",borderRadius:999,background:"linear-gradient(90deg,#6366f1,#a78bfa)"}} />
+            </div>
+            <div style={{fontSize:12,color:"#475569"}}>£7,550 paid · 38% complete</div>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+            {[["Active Debts","4","#fff"],["Highest Rate","24.9%","#f97316"],["Min Monthly","£385","#fff"],["Paid So Far","£7,550","#34d399"]].map(([l,v,c])=>(
+              <div key={l} style={{background:"#0d0d17",border:"1px solid #1e1e3a",borderRadius:12,padding:12}}>
+                <div style={{fontSize:10,color:"#475569",fontWeight:600,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:4}}>{l}</div>
+                <div style={{fontSize:20,fontWeight:800,color:c}}>{v}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <section style={S.featuresWrap}>
+        <div style={{textAlign:"center",marginBottom:0}}>
+          <div style={{fontSize:12,color:"#6366f1",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:12}}>Everything you need</div>
+          <h2 style={{fontSize:"clamp(26px,4vw,38px)",fontWeight:800,color:"#fff",letterSpacing:"-1px",marginBottom:12}}>Your personal debt advisor</h2>
+          <p style={{fontSize:16,color:"#64748b",maxWidth:480,margin:"0 auto"}}>Settled gives you the tools and insights to pay off debt faster and smarter.</p>
+        </div>
+        <div style={S.featuresGrid}>
+          {features.map(f=>(
+            <div key={f.title} style={S.featureCard}>
+              <div style={S.featureIcon}>{f.icon}</div>
+              <div style={{fontSize:17,fontWeight:700,color:"#fff",marginBottom:8}}>{f.title}</div>
+              <div style={{fontSize:14,color:"#64748b",lineHeight:1.6}}>{f.desc}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={S.pricingWrap}>
+        <div style={{textAlign:"center",marginBottom:32}}>
+          <div style={{fontSize:12,color:"#6366f1",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:12}}>Simple pricing</div>
+          <h2 style={{fontSize:"clamp(26px,4vw,38px)",fontWeight:800,color:"#fff",letterSpacing:"-1px",marginBottom:12}}>Start free, upgrade when ready</h2>
+          <div style={{background:"#12122a",border:"1px solid #1e1e3a",borderRadius:12,padding:"14px 20px",display:"inline-block",fontSize:14,color:"#64748b"}}>
+            <strong style={{color:"#e2e8f0"}}>Free plan</strong> — Track up to 2 debts · See your debt-free date · No card needed
+          </div>
+        </div>
+        <div style={S.pricingGrid}>
+          {[
+            {plan:"Monthly",price:"£2.99",period:"/mo",desc:"Flexible. Cancel anytime.",featured:false,link:"https://buy.stripe.com/5kQ00jcfv39o84W1pn4ow01",label:"Get started monthly"},
+            {plan:"Yearly",price:"£19.99",period:"/yr",desc:"Best value. Save £15.89/yr.",featured:true,badge:"BEST VALUE",link:"https://buy.stripe.com/6oUcN54N3fWa70S8RP4ow02",label:"Get yearly access"},
+          ].map(p=>(
+            <div key={p.plan} style={S.pricingCard(p.featured)}>
+              {p.badge&&<div style={{position:"absolute",top:-12,left:"50%",transform:"translateX(-50%)",background:"#6366f1",color:"#fff",fontSize:11,fontWeight:700,padding:"4px 14px",borderRadius:999,whiteSpace:"nowrap"}}>{p.badge}</div>}
+              <div style={{fontSize:12,color:p.featured?"#a78bfa":"#64748b",fontWeight:600,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:12}}>{p.plan}</div>
+              <div style={{fontSize:36,fontWeight:800,color:"#fff",letterSpacing:"-1px"}}>{p.price}<span style={{fontSize:14,color:"#475569",fontWeight:400}}>{p.period}</span></div>
+              <div style={{fontSize:13,color:"#475569",margin:"10px 0 20px"}}>{p.desc}</div>
+              {["Unlimited debts","Pay Faster slider","Payoff goals","Strategy comparison","Budget Accelerator","Backup & export"].map(f=>(
+                <div key={f} style={{fontSize:13,color:"#94a3b8",padding:"6px 0",borderBottom:"1px solid #1e1e3a",display:"flex",alignItems:"center",gap:8}}>
+                  <span style={{color:"#34d399",fontWeight:700}}>✓</span>{f}
+                </div>
+              ))}
+              <button style={{...S.btnPrimary,width:"100%",marginTop:20,background:p.featured?"#6366f1":"#1e1e3a",boxShadow:"none",fontSize:14}} onClick={()=>window.location.href=p.link}>{p.label}</button>
+            </div>
+          ))}
+        </div>
+        <div style={{fontSize:12,color:"#334155",textAlign:"center",marginTop:20}}>🔒 Secure payment via Stripe · No hidden fees · Cancel anytime</div>
+      </section>
+
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:16,maxWidth:800,margin:"0 auto 60px",padding:"0 24px"}}>
+        {[["🔒","256-bit encryption","Your data is encrypted and never shared"],["🇬🇧","UK GDPR compliant","Built for UK users with full data protection"],["☁️","Your data, always","We never sell your data. Export or delete anytime"],["📱","Works everywhere","Phone, tablet, desktop — syncs across all devices"]].map(([icon,title,desc])=>(
+          <div key={title} style={{background:"#12122a",border:"1px solid #1e1e3a",borderRadius:14,padding:20,textAlign:"center"}}>
+            <div style={{fontSize:24,marginBottom:8}}>{icon}</div>
+            <div style={{fontSize:13,fontWeight:700,color:"#fff",marginBottom:4}}>{title}</div>
+            <div style={{fontSize:12,color:"#475569",lineHeight:1.5}}>{desc}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style={S.ctaBanner}>
+        <div style={S.ctaInner}>
+          <h2 style={{fontSize:"clamp(22px,4vw,34px)",fontWeight:800,color:"#fff",letterSpacing:"-1px",marginBottom:12}}>Start your journey to debt freedom today</h2>
+          <p style={{fontSize:16,color:"#64748b",marginBottom:28}}>Free to start. No credit card needed. See your debt-free date in 60 seconds.</p>
+          <button style={S.btnPrimary} onClick={onGetStarted}>Get started free →</button>
+        </div>
+      </div>
+
+      <div style={{borderTop:"1px solid #1e1e3a",padding:"28px 24px",maxWidth:1100,margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16}}>
+        <div style={{display:"flex",alignItems:"center",gap:8}}>
+          <span style={{color:"#6366f1"}}>✦</span>
+          <span style={{fontWeight:700,color:"#fff"}}>Settled</span>
+        </div>
+        <div style={{display:"flex",gap:20,flexWrap:"wrap"}}>
+          {[["Privacy Policy","/privacy.html"],["Terms & Conditions","/terms.html"],["Contact","mailto:hello@settlednow.co.uk"]].map(([label,href])=>(
+            <a key={label} href={href} style={{fontSize:13,color:"#475569",textDecoration:"none"}}>{label}</a>
+          ))}
+        </div>
+        <div style={{fontSize:13,color:"#334155"}}>© 2026 Settled</div>
+      </div>
+    </div>
+  );
+}
+
 function AuthScreen() {
   const [mode,setMode]=useState("signin");
   const [email,setEmail]=useState("");
@@ -259,9 +424,15 @@ function AuthScreen() {
         </button>
         {mode==="signin"&&<button style={{background:"none",border:"none",color:"#6366f1",fontSize:12,cursor:"pointer",padding:0,marginTop:16,display:"block",textAlign:"center",width:"100%"}} onClick={()=>{setMode("reset");setError("");setMessage("");}}>Forgot password?</button>}
         {mode==="reset"&&<button style={{background:"none",border:"none",color:"#6366f1",fontSize:12,cursor:"pointer",padding:0,marginTop:16,display:"block",textAlign:"center",width:"100%"}} onClick={()=>{setMode("signin");setError("");setMessage("");}}>← Back to sign in</button>}
-        <div style={{marginTop:20,borderTop:"1px solid #1e1e3a",paddingTop:16,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>
-          <span style={{fontSize:14}}>🔒</span>
-          <span style={{fontSize:11,color:"#334155"}}>256-bit encryption · Your data is never sold</span>
+        <div style={{marginTop:20,borderTop:"1px solid #1e1e3a",paddingTop:16,textAlign:"center"}}>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,marginBottom:10}}>
+            <span style={{fontSize:14}}>🔒</span>
+            <span style={{fontSize:11,color:"#334155"}}>256-bit encryption · Your data is never sold</span>
+          </div>
+          <div style={{display:"flex",justifyContent:"center",gap:16}}>
+            <a href="/privacy.html" target="_blank" style={{fontSize:11,color:"#475569",textDecoration:"none"}}>Privacy Policy</a>
+            <a href="/terms.html" target="_blank" style={{fontSize:11,color:"#475569",textDecoration:"none"}}>Terms & Conditions</a>
+          </div>
         </div>
       </div>
     </div>
@@ -579,6 +750,7 @@ export default function DebtTracker() {
   const [showShareCard,setShowShareCard]=useState(false);
   const [showBudgetInput,setShowBudgetInput]=useState(false);
   const [showAccount,setShowAccount]=useState(false);
+  const [showLanding,setShowLanding]=useState(true);
   const [showFreedom,setShowFreedom]=useState(false);
   const [freedomDismissed,setFreedomDismissed]=useState(false);
   const [showArchived,setShowArchived]=useState(false);
@@ -862,7 +1034,10 @@ export default function DebtTracker() {
   async function handleSignOut(){await supabase.auth.signOut();}
 
   if (authLoading) return <LoadingScreen />;
-  if (!session) return <AuthScreen />;
+  if (!session) {
+    if (showLanding) return <LandingPage onGetStarted={()=>setShowLanding(false)} />;
+    return <AuthScreen />;
+  }
   if (dataLoading) return <LoadingScreen />;
 
   const nextStep=getNextStep();
@@ -1311,6 +1486,10 @@ export default function DebtTracker() {
             </div>
 
             <div style={{fontSize:11,color:"#334155",textAlign:"center",marginBottom:8}}>🔒 Secure payment via Stripe · No hidden fees</div>
+            <div style={{display:"flex",justifyContent:"center",gap:16",marginBottom:8}}>
+              <a href="/privacy.html" target="_blank" style={{fontSize:11,color:"#475569",textDecoration:"none"}}>Privacy Policy</a>
+              <a href="/terms.html" target="_blank" style={{fontSize:11,color:"#475569",textDecoration:"none"}}>Terms & Conditions</a>
+            </div>
             <button style={{...S.btn("ghost"),width:"100%"}} onClick={()=>setShowUpgrade(false)}>Maybe later</button>
           </div>
         </div>
