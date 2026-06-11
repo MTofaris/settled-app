@@ -657,6 +657,11 @@ export default function DebtTracker() {
           if (!debt.paymentDueDay||Number(debt.balance)<=0) return debt;
           const dueDay=Number(debt.paymentDueDay);
           if (todayDate<dueDay) return debt;
+          // Don't apply if debt was created this month after the due date
+          if (debt.startDate) {
+            const start=new Date(debt.startDate);
+            if (start.getFullYear()===currentYear&&start.getMonth()===currentMonth) return debt;
+          }
           // Check if already auto-applied this month
           const alreadyApplied=(debt.payments||[]).some(p=>{
             if (!p.auto) return false;
@@ -1129,9 +1134,9 @@ export default function DebtTracker() {
       {activeTab==="debts"&&(
         <div style={S.section}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16,marginTop:4}}>
-            <div style={{display:"flex",background:"#0d0d17",borderRadius:10,padding:3,border:"1px solid #1e1e3a",flex:1,marginRight:12}}>
-              <button style={{flex:1,padding:"7px 6px",borderRadius:8,border:"none",cursor:"pointer",fontSize:12,fontWeight:600,background:strategy==="avalanche"?"#6366f1":"transparent",color:strategy==="avalanche"?"#fff":"#475569",transition:"all 0.2s"}} onClick={()=>setStrategy("avalanche")}>🔥 Avalanche</button>
-              <button style={{flex:1,padding:"7px 6px",borderRadius:8,border:"none",cursor:"pointer",fontSize:12,fontWeight:600,background:strategy==="snowball"?"#6366f1":"transparent",color:strategy==="snowball"?"#fff":"#475569",transition:"all 0.2s"}} onClick={()=>setStrategy("snowball")}>❄️ Snowball</button>
+            <div style={{display:"flex",background:"#0d0d17",borderRadius:10,padding:3,border:"1px solid #1e1e3a",flex:1,marginRight:12,position:"relative"}} onClick={!isPremium?()=>setShowUpgrade(true):undefined}>
+              <button style={{flex:1,padding:"7px 6px",borderRadius:8,border:"none",cursor:isPremium?"pointer":"not-allowed",fontSize:12,fontWeight:600,background:strategy==="avalanche"?"#6366f1":"transparent",color:strategy==="avalanche"?"#fff":"#475569",transition:"all 0.2s",opacity:isPremium?1:0.5}} onClick={isPremium?()=>setStrategy("avalanche"):undefined}>🔥 Avalanche</button>
+              <button style={{flex:1,padding:"7px 6px",borderRadius:8,border:"none",cursor:isPremium?"pointer":"not-allowed",fontSize:12,fontWeight:600,background:strategy==="snowball"?"#6366f1":"transparent",color:strategy==="snowball"?"#fff":"#475569",transition:"all 0.2s",opacity:isPremium?1:0.5}} onClick={isPremium?()=>setStrategy("snowball"):undefined}>❄️ Snowball {!isPremium&&"✦"}</button>
             </div>
             <select value={debtSort} onChange={e=>setDebtSort(e.target.value)} style={{background:"#12122a",border:"1px solid #1e1e3a",borderRadius:8,padding:"7px 10px",color:"#e2e8f0",fontSize:12,cursor:"pointer"}}>
               <option value="type">By type</option>
@@ -1231,10 +1236,10 @@ export default function DebtTracker() {
           )}
 
           <div style={{marginTop:16,background:"#12122a",border:"1px solid #1e1e3a",borderRadius:14,padding:16}}>
-            <div style={{fontSize:13,fontWeight:700,color:"#fff",marginBottom:4}}>Data & Backup</div>
+            <div style={{fontSize:13,fontWeight:700,color:"#fff",marginBottom:4}}>Data & Backup <span style={{fontSize:10,color:"#6366f1",fontWeight:600}}>✦ Premium</span></div>
             <div style={{display:"flex",gap:8,marginBottom:8}}>
-              <button style={{...S.btn("default"),flex:1,opacity:debts.length===0?0.4:1}} onClick={()=>exportData("json")} disabled={debts.length===0}>⬇ Backup</button>
-              <button style={{...S.btn("default"),flex:1,opacity:debts.length===0?0.4:1}} onClick={()=>exportData("csv")} disabled={debts.length===0}>⬇ CSV</button>
+              <button style={{...S.btn("default"),flex:1,opacity:(!isPremium||debts.length===0)?0.4:1}} onClick={isPremium?()=>exportData("json"):()=>setShowUpgrade(true)} disabled={debts.length===0}>⬇ Backup</button>
+              <button style={{...S.btn("default"),flex:1,opacity:(!isPremium||debts.length===0)?0.4:1}} onClick={isPremium?()=>exportData("csv"):()=>setShowUpgrade(true)} disabled={debts.length===0}>⬇ CSV</button>
             </div>
             {isPremium&&(
               <label style={{display:"block",background:"#1e1e3a",borderRadius:10,padding:"11px",textAlign:"center",cursor:"pointer",fontSize:13,color:"#94a3b8"}}>
@@ -1287,16 +1292,16 @@ export default function DebtTracker() {
               </div>
               <div style={{background:"linear-gradient(135deg,#6366f118,#a78bfa12)",border:"2px solid #6366f1",borderRadius:14,padding:16,position:"relative",cursor:"pointer"}} onClick={()=>{window.location.href="https://buy.stripe.com/5kQ9AT6Vb25k3OG6JH4ow00";}}>
                 <div style={{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:"#6366f1",color:"#fff",fontSize:10,fontWeight:700,borderRadius:999,padding:"3px 10px",whiteSpace:"nowrap"}}>BEST VALUE</div>
-                <div style={{fontSize:10,color:"#a78bfa",fontWeight:600,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:8}}>One-time</div>
+                <div style={{fontSize:10,color:"#a78bfa",fontWeight:600,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:8}}>Yearly</div>
                 <div style={{fontSize:28,fontWeight:800,color:"#fff",letterSpacing:"-1px"}}>£19.99</div>
-                <div style={{fontSize:11,color:"#475569",marginTop:2}}>forever</div>
-                <div style={{fontSize:11,color:"#34d399",marginTop:8,lineHeight:1.5}}>Saves £X vs monthly · yours forever</div>
-                <button style={{width:"100%",background:"#6366f1",color:"#fff",border:"none",borderRadius:10,padding:"10px",fontSize:13,fontWeight:700,cursor:"pointer",marginTop:12}}>Get lifetime access</button>
+                <div style={{fontSize:11,color:"#475569",marginTop:2}}>per year</div>
+                <div style={{fontSize:11,color:"#34d399",marginTop:8,lineHeight:1.5}}>Save £15.89/yr vs monthly · cancel anytime</div>
+                <button style={{width:"100%",background:"#6366f1",color:"#fff",border:"none",borderRadius:10,padding:"10px",fontSize:13,fontWeight:700,cursor:"pointer",marginTop:12}}>Get yearly access</button>
               </div>
             </div>
 
             <div style={{borderTop:"1px solid #1e1e3a",paddingTop:16,marginBottom:16}}>
-              <div style={{fontSize:11,color:"#475569",fontWeight:600,letterSpacing:"0.5px",marginBottom:12}}>EVERYTHING INCLUDED IN BOTH PLANS</div>
+              <div style={{fontSize:11,color:"#475569",fontWeight:600,letterSpacing:"0.5px",marginBottom:12}}>SETTLED PREMIUM INCLUDES</div>
               {[["⚡","Pay Faster slider","See your debt-free date with any extra amount"],["🎯","Payoff goals","Set a clear-by date per debt with full breakdown"],["🔥","Strategy comparison","Avalanche vs snowball"],["💰","Budget Accelerator","Debt-free date based on your real budget"],["✦","Unlimited debts","Track every loan, card, and liability"],["⬇","Backup & export","JSON and CSV anytime"]].map(([icon,title,sub])=>(
                 <div key={title} style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
                   <div style={{width:28,height:28,borderRadius:8,background:"#6366f115",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,flexShrink:0}}>{icon}</div>
