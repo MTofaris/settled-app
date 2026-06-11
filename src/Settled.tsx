@@ -350,6 +350,7 @@ function LandingPage({onGetStarted}) {
           <h2 style={{fontSize:"clamp(22px,4vw,34px)",fontWeight:800,color:"#fff",letterSpacing:"-1px",marginBottom:12}}>Start your journey to debt freedom today</h2>
           <p style={{fontSize:16,color:"#64748b",marginBottom:28}}>Free to start. No credit card needed. See your debt-free date in 60 seconds.</p>
           <button style={S.btnPrimary} onClick={onGetStarted}>Get started free →</button>
+          <div style={{fontSize:12,color:"#334155",marginTop:16}}>📱 iPhone: tap Share → Add to Home Screen for the full app experience</div>
         </div>
       </div>
 
