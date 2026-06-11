@@ -1290,7 +1290,7 @@ export default function DebtTracker() {
                 <div style={{fontSize:11,color:"#475569",marginTop:8,lineHeight:1.5}}>Flexible · cancel anytime</div>
                 <button style={{width:"100%",background:"#1e1e3a",color:"#e2e8f0",border:"none",borderRadius:10,padding:"10px",fontSize:13,fontWeight:600,cursor:"pointer",marginTop:12}}>Start monthly</button>
               </div>
-              <div style={{background:"linear-gradient(135deg,#6366f118,#a78bfa12)",border:"2px solid #6366f1",borderRadius:14,padding:16,position:"relative",cursor:"pointer"}} onClick={()=>{window.location.href="https://buy.stripe.com/5kQ9AT6Vb25k3OG6JH4ow00";}}>
+              <div style={{background:"linear-gradient(135deg,#6366f118,#a78bfa12)",border:"2px solid #6366f1",borderRadius:14,padding:16,position:"relative",cursor:"pointer"}} onClick={()=>{window.location.href="https://buy.stripe.com/6oUcN54N3fWa70S8RP4ow02";}}>
                 <div style={{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:"#6366f1",color:"#fff",fontSize:10,fontWeight:700,borderRadius:999,padding:"3px 10px",whiteSpace:"nowrap"}}>BEST VALUE</div>
                 <div style={{fontSize:10,color:"#a78bfa",fontWeight:600,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:8}}>Yearly</div>
                 <div style={{fontSize:28,fontWeight:800,color:"#fff",letterSpacing:"-1px"}}>£19.99</div>
